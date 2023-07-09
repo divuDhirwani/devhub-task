@@ -1,21 +1,31 @@
-// import { profileApi } from "apiServices/profileService";
-import { useEffect } from "react";
-import { profileApi } from "src/apiServices/profileService";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { BASEURL } from "src/apiServices/config";
 import image from "src/assets/images/userImage.png";
 import CustomButton from "src/components/customButton/CustomButton";
 import CustomInfoContainer from "src/components/customInfoContainer/CustomInfoContainer";
 import CustomInput from "src/components/customInput/CustomInput";
 function Profile() {
-  // const token = useSelector((state) => state?.authReducer?.accessToken);
+  const token = useSelector((state) => state?.authReducer?.accessToken);
+  const [profileData, setProfileData] = useState();
+  console.log(profileData);
+
   const getProfileData = async () => {
     try {
-      let res = await profileApi();
-      console.log(res);
-    } catch (error) {}
+      let res = await fetch(`${BASEURL}/profile`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      let temp = await res.json();
+      setProfileData(temp?.data);
+    } catch (error) {
+      console.log("error from profile", error);
+    }
   };
+
   useEffect(() => {
     getProfileData();
   }, []);
+
   return (
     <div
       style={{
