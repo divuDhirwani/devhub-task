@@ -8,10 +8,8 @@ function CustomInput({
   errorMessage,
   type = "text",
 }) {
-  const [isPassword, setIsPassword] = useState(
-    type === "password" ? true : false
-  );
   const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div
       style={{
@@ -26,7 +24,7 @@ function CustomInput({
       }}
     >
       <input
-        type={showPassword ? "password" : "text"}
+        type={type === "text" ? "text" : showPassword ? "text" : "password"}
         onChange={onChange}
         name={name}
         placeholder={placeholder}
