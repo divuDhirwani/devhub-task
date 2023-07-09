@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   accessToken: null,
+  userDetails: {},
 };
 
 export const authReducer = createSlice({
@@ -11,10 +12,13 @@ export const authReducer = createSlice({
     updateAccessToken: (state, action) => {
       state.accessToken = action.payload;
     },
+    updateUserDetails: (state, action) => {
+      state.userDetails = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateAccessToken } = authReducer.actions;
+export const { updateAccessToken, updateUserDetails } = authReducer.actions;
 
 export default authReducer.reducer;
