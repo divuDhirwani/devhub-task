@@ -14,13 +14,18 @@ function App() {
   const token = useSelector((state) => state?.authReducer?.accessToken);
 
   useEffect(() => {
-    if (token && ["/", LOGIN, REGISTER]?.includes(location?.pathname)) {
+    if (
+      token &&
+      ["/", `${AUTH}/${LOGIN}`, `${AUTH}/${REGISTER}`]?.includes(
+        location?.pathname
+      )
+    ) {
       navigate(PROFILE);
     } else if (!token && ["/", PROFILE]?.includes(location?.pathname)) {
       navigate(`${AUTH}/${LOGIN}`);
     }
   }, [token]);
-
+  console.log(token);
   return (
     <Routes>
       {!token ? (
