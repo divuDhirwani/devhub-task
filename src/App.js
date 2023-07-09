@@ -29,9 +29,7 @@ function App() {
           <Route path={REGISTER} element={<Register />} />
         </Route>
       ) : (
-        <Route>
-          <Route path={PROFILE} element={<Profile />} />
-        </Route>
+        <Route path={PROFILE} element={<Profile />} />
       )}
       <Route />
     </Routes>

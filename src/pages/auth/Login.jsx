@@ -1,11 +1,14 @@
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "src/components/customButton/CustomButton";
 import CustomInput from "src/components/customInput/CustomInput";
 import routeNames from "src/constants/routeNames";
+import { updateAccessToken } from "src/redux/reducers/authReducer";
 
 // import LoginSignUpImage from "../../assets/images/loginSignUp.jpg";
 function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { REGISTER, AUTH } = routeNames;
   // const dispatch = useDispatch();
   // const aaa = useSelector((s) => s?.authReducer?.accessToken);
@@ -42,7 +45,10 @@ function Login() {
         />
         <CustomInput placeholder="Password" style={{ marginBottom: "20px" }} />
       </div>
-      <CustomButton name={"Login"} />
+      <CustomButton
+        name={"Login"}
+        onClick={() => dispatch(updateAccessToken("token"))}
+      />
 
       <div style={{ marginTop: "10px" }}>
         Didn't have an account?

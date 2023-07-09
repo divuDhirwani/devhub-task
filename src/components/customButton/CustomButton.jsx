@@ -1,8 +1,9 @@
 import React from "react";
 
-function CustomButton({ name }) {
+function CustomButton({ name, onClick }) {
   return (
     <button
+      onClick={onClick}
       style={{
         borderRadius: "25px",
         outline: "none",
