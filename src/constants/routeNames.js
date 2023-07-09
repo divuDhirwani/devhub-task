@@ -1,5 +1,6 @@
 export default {
-  LOGIN: "/login",
-  REGISTER: "/register",
+  AUTH: "/auth",
+  LOGIN: "login",
+  REGISTER: "register",
   PROFILE: "/profile",
 };
