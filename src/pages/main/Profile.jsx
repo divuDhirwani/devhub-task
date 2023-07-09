@@ -1,10 +1,11 @@
 // import { profileApi } from "apiServices/profileService";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { profileApi } from "src/apiServices/profileService";
 import image from "src/assets/images/userImage.png";
 import CustomButton from "src/components/customButton/CustomButton";
 import CustomInfoContainer from "src/components/customInfoContainer/CustomInfoContainer";
 function Profile() {
+  // const token = useSelector((state) => state?.authReducer?.accessToken);
   const getProfileData = async () => {
     try {
       let res = await profileApi();

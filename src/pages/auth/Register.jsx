@@ -140,7 +140,7 @@ function Register() {
       <div style={{ margin: "10px" }}>
         Already have an account?
         <span
-          style={{ color: "#2412E4", marginLeft: "5px" }}
+          style={{ color: "#2412E4", marginLeft: "5px", cursor: "pointer" }}
           onClick={() => navigate(`${AUTH}/${LOGIN}`)}
         >
           Login
