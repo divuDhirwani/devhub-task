@@ -25,7 +25,7 @@ function App() {
       navigate(`${AUTH}/${LOGIN}`);
     }
   }, [token]);
-  console.log(token);
+
   return (
     <Routes>
       {!token ? (
