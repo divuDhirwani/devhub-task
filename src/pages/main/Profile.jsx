@@ -1,8 +1,9 @@
 // import { profileApi } from "apiServices/profileService";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { profileApi } from "src/apiServices/profileService";
 
 function Profile() {
+  // const token = useSelector((state) => state?.authReducer?.accessToken);
   const getProfileData = async () => {
     try {
       let res = await profileApi();

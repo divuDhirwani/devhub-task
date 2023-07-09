@@ -9,7 +9,7 @@ function CustomButton({ name, onClick }) {
         outline: "none",
         border: "1px solid transparent",
         backgroundColor: "#2412E4",
-        // padding: "50px 10px",
+        cursor: "pointer",
         maxWidth: "320px",
         width: "100%",
         minHeight: "50px",

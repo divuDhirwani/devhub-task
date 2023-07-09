@@ -1,6 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
-function CustomInput({ name, style, placeholder = "placeholder", onChange }) {
+function CustomInput({
+  name,
+  style,
+  placeholder = "placeholder",
+  onChange,
+  errorMessage,
+  type = "text",
+}) {
+  const [isPassword, setIsPassword] = useState(
+    type === "password" ? true : false
+  );
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div
       style={{
@@ -10,14 +21,16 @@ function CustomInput({ name, style, placeholder = "placeholder", onChange }) {
         position: "relative",
         alignItems: "center",
         justifyContent: "center",
+        flexDirection: "column",
+        ...style,
       }}
     >
       <input
+        type={showPassword ? "password" : "text"}
         onChange={onChange}
         name={name}
         placeholder={placeholder}
         style={{
-          ...style,
           borderRadius: "25px",
           outline: "none",
           border: "1px solid transparent",
@@ -27,10 +40,44 @@ function CustomInput({ name, style, placeholder = "placeholder", onChange }) {
           width: "100%",
           height: "40px",
         }}
-        type="text"
       />
-      <BsEye style={{ position: "absolute", right: 15, top: 18 }} />
-      <BsEyeSlash style={{ position: "absolute", right: 15, top: 18 }} />
+      {type === "password" ? (
+        <>
+          {showPassword ? (
+            <BsEyeSlash
+              style={{
+                position: "absolute",
+                right: 15,
+                top: 18,
+                cursor: "pointer",
+              }}
+              onClick={() => setShowPassword(false)}
+            />
+          ) : (
+            <BsEye
+              style={{
+                position: "absolute",
+                right: 15,
+                top: 18,
+                cursor: "pointer",
+              }}
+              onClick={() => setShowPassword(true)}
+            />
+          )}
+        </>
+      ) : null}
+      {errorMessage && (
+        <div
+          style={{
+            maxWidth: "300px",
+            width: "100%",
+            color: "red",
+            fontSize: "13px",
+          }}
+        >
+          {errorMessage}
+        </div>
+      )}
     </div>
   );
 }
