@@ -6,11 +6,12 @@ import Auth from "./pages/auth/Auth";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Profile from "./pages/main/Profile";
+import UpdateProfile from "./pages/main/UpdateProfile";
 
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { AUTH, LOGIN, PROFILE, REGISTER } = routeNames;
+  const { AUTH, LOGIN, PROFILE, REGISTER, UPDATEPROFILE } = routeNames;
   const token = useSelector((state) => state?.authReducer?.accessToken);
 
   useEffect(() => {
@@ -34,7 +35,10 @@ function App() {
           <Route path={REGISTER} element={<Register />} />
         </Route>
       ) : (
-        <Route path={PROFILE} element={<Profile />} />
+        <>
+          <Route path={PROFILE} element={<Profile />} />
+          <Route path={UPDATEPROFILE} element={<UpdateProfile />} />
+        </>
       )}
       <Route />
     </Routes>

@@ -1,21 +1,9 @@
-// import { profileApi } from "apiServices/profileService";
-import { useEffect } from "react";
-import { profileApi } from "src/apiServices/profileService";
+import React from "react";
 import image from "src/assets/images/userImage.png";
 import CustomButton from "src/components/customButton/CustomButton";
 import CustomInfoContainer from "src/components/customInfoContainer/CustomInfoContainer";
 import CustomInput from "src/components/customInput/CustomInput";
-function Profile() {
-  // const token = useSelector((state) => state?.authReducer?.accessToken);
-  const getProfileData = async () => {
-    try {
-      let res = await profileApi();
-      console.log(res);
-    } catch (error) {}
-  };
-  useEffect(() => {
-    getProfileData();
-  }, []);
+function UpdateProfile() {
   return (
     <div
       style={{
@@ -35,7 +23,7 @@ function Profile() {
           boxShadow: "rgba(100, 100, 111, 0.2) 0px 7px 29px 0px",
         }}
       >
-        <div style={{ fontSize: "30px", fontWeight: "bold" }}>User Profile</div>
+        <div style={{ fontSize: "30px", fontWeight: "bold" }}>Edit Profile</div>
         <div
           style={{
             display: "flex",
@@ -64,22 +52,22 @@ function Profile() {
                 marginBottom: "60px",
               }}
             >
-              <CustomInfoContainer name="Fisrt Name" />
+              <CustomInput placeholder="Fisrt Name" />
 
-              <CustomInfoContainer name="Last Name" />
+              <CustomInput placeholder="Last Name" />
             </div>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <CustomInfoContainer name="Email" />
-              <CustomInfoContainer name="Mobile Number" />
+              <CustomInput placeholder="Email" />
+              <CustomInput placeholder="Mobile Number" />
             </div>
             <div
               style={{
                 display: "flex",
                 justifyContent: "flex-start",
-                margin: "60px 40px",
+                margin: "60px 32px",
               }}
             >
-              <CustomInfoContainer name="Age" />
+              <CustomInput placeholder="Age" />
             </div>
           </div>
           <div
@@ -89,7 +77,7 @@ function Profile() {
               marginTop: "40px",
             }}
           >
-            <CustomButton name="Edit Profile" />
+            <CustomButton name="Update Profile" />
           </div>
         </div>
       </div>
@@ -97,4 +85,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default UpdateProfile;

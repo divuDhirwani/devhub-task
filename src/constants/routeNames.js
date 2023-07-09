@@ -3,4 +3,5 @@ export default {
   LOGIN: "login",
   REGISTER: "register",
   PROFILE: "/profile",
+  UPDATEPROFILE: "/updateProfile",
 };

@@ -8,7 +8,7 @@ function CustomInfoContainer({ name }) {
           width: "250px",
           height: "40px",
 
-          borderRadius: "20px",
+          borderRadius: "10px",
           padding: "10px",
           backgroundColor: "rgb(220, 223, 255)",
           outline: "none",
