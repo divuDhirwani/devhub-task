@@ -19,7 +19,7 @@ function Register() {
     email: "",
     password: "",
   });
-  // console.log(userDetails);
+
   const handleRegister = async () => {
     try {
       let res = await registerApi({

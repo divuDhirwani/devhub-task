@@ -9,13 +9,15 @@ function CustomInfoContainer({ name, value }) {
           height: "40px",
 
           borderRadius: "10px",
-          padding: "10px",
+          padding: "15px",
           backgroundColor: "rgb(220, 223, 255)",
           outline: "none",
+          fontWeight: "bold",
+          fontFamily: "sans-serif",
         }}
       >
         {name}
-        <div>{value}</div>
+        <div style={{ fontWeight: "lighter" }}>{value}</div>
       </div>
     </div>
   );

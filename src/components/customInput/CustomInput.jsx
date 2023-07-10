@@ -17,7 +17,7 @@ function CustomInput({
     <div
       style={{
         display: "flex",
-        maxWidth: "300px",
+        maxWidth: "270px",
         width: "100%",
         position: "relative",
         alignItems: "center",

@@ -13,7 +13,6 @@ function Profile() {
     (state) => state?.authReducer?.userDetails
   );
   const [profileData, setProfileData] = useState(profileDetails);
-  console.log(profileData);
   const { UPDATE_PROFILE } = routeNames;
   const navigate = useNavigate();
 
@@ -70,7 +69,7 @@ function Profile() {
               // marginLeft: "30px",
               marginTop: "30px",
             }}
-            src={image}
+            src={profileData?.profile ? profileData?.profile : image}
             alt=""
           />{" "}
           <div style={{ flexWrap: "wrap" }}>
@@ -85,19 +84,19 @@ function Profile() {
                 value={profileData.first_name}
                 key={profileData?.first_name}
                 // setProfileData={profileDetails?.first_name}
-                // name="First Name"
+                name="First Name"
               />
 
               <CustomInfoContainer
                 value={profileData.last_name}
-                // name="Last Name"
+                name="Last Name"
               />
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <CustomInfoContainer value={profileData?.email} />
+              <CustomInfoContainer value={profileData?.email} name="Email" />
               <CustomInfoContainer
                 value={profileData?.mobile}
-                // name="Mobile Number"
+                name="Mobile Number"
               />
             </div>
             <div
@@ -110,7 +109,7 @@ function Profile() {
               <CustomInfoContainer
                 key={profileData.age}
                 value={profileData.age}
-                // name="Age"
+                name="Age"
               />
             </div>
           </div>
