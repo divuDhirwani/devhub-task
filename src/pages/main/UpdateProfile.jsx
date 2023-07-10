@@ -13,7 +13,7 @@ function UpdateProfile() {
   const token = useSelector((state) => state?.authReducer?.accessToken);
   const { PROFILE } = routeNames;
   const navigate = useNavigate();
-  const [UpdateProfileData, setUpdateProfileData] = useState({
+  const [updateProfileData, setUpdateProfileData] = useState({
     first_name: profileData?.first_name,
     last_name: profileData?.last_name,
     age: profileData?.age,
@@ -33,22 +33,23 @@ function UpdateProfile() {
       }));
     }
   };
-  console.log(UpdateProfileData, "divya");
+  console.log(updateProfileData, "divya");
   const submitUpdateProfile = async () => {
     try {
       let fd = new FormData();
-      fd.append("first_name", updateUserDetails?.first_name);
-      fd.append("last_name", updateUserDetails?.last_name);
-      fd.append("age", updateUserDetails?.age);
-      fd.append("profile", updateUserDetails?.profile);
+      fd.append("first_name", "aakash burman");
+      fd.append("last_name", updateProfileData?.last_name);
+      fd.append("age", updateProfileData?.age);
+      fd.append("profile", updateProfileData?.profile);
+      console.log(fd);
       let res = await fetch(`${BASEURL}/update_profile`, {
-        method: "POST",
+        method: "post",
+        body: updateProfileData,
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`,
         },
-        body: fd,
-      });
+      }).then((res) => console.log(res));
       let temp = await res.json();
       console.log(temp, "divya");
       if (temp?.status) {
@@ -108,8 +109,8 @@ function UpdateProfile() {
                 objectFit: "cover",
               }}
               src={
-                UpdateProfileData?.profile
-                  ? URL.createObjectURL(UpdateProfileData?.profile)
+                updateProfileData?.profile
+                  ? URL.createObjectURL(updateProfileData?.profile)
                   : image
               }
               alt=""

@@ -15,7 +15,7 @@ function Profile() {
   const [profileData, setProfileData] = useState(profileDetails);
   const { UPDATE_PROFILE } = routeNames;
   const navigate = useNavigate();
-
+  console.log(profileData, "divya");
   const getProfileData = async () => {
     try {
       let res = await fetch(`${BASEURL}/profile`, {
