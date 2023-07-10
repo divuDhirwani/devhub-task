@@ -2,6 +2,8 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 // import LoginSignUpImage from "src/assets/images/loginSignUp.jpg";
 import LoginSignUpImage from "src/assets/images/loginSignUp.jpg";
+import "./auth.css";
+
 function Auth() {
   return (
     <div
@@ -13,13 +15,9 @@ function Auth() {
         flex: 1,
       }}
     >
-      <img
-        style={{ display: "flex", width: "50%" }}
-        src={LoginSignUpImage}
-        alt=""
-      />
+      <img src={LoginSignUpImage} alt="" className="auth_left_section" />
 
-      <div style={{ display: "flex", width: "50%" }}>
+      <div className="auth_right_section">
         <Outlet />
       </div>
     </div>
