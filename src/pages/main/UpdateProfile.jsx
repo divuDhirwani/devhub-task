@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +20,7 @@ function UpdateProfile() {
     age: profileData?.age,
     profile: profileData?.profile,
   });
+
   const handleChange = (e) => {
     if (e.target.type === "file") {
       if (e.target.files)
@@ -33,32 +35,30 @@ function UpdateProfile() {
       }));
     }
   };
-  console.log(updateProfileData, "divya");
+
   const submitUpdateProfile = async () => {
     try {
       let fd = new FormData();
-      fd.append("first_name", "aakash burman");
+      fd.append("first_name", updateProfileData?.first_name);
       fd.append("last_name", updateProfileData?.last_name);
       fd.append("age", updateProfileData?.age);
       fd.append("profile", updateProfileData?.profile);
-      console.log(fd);
-      let res = await fetch(`${BASEURL}/update_profile`, {
-        method: "post",
-        body: updateProfileData,
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${token}`,
-        },
-      }).then((res) => console.log(res));
-      let temp = await res.json();
-      console.log(temp, "divya");
-      if (temp?.status) {
-        dispatch(updateUserDetails(temp?.data));
-        alert("Updated successful");
-        navigate(PROFILE);
-      } else {
-        alert(temp?.message);
-      }
+      await axios
+        .post(`${BASEURL}/update_profile`, fd, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((res) => {
+          if (res?.data?.status) {
+            dispatch(updateUserDetails(res?.data?.data));
+            navigate(PROFILE);
+          } else {
+            alert(res?.data?.message);
+          }
+        })
+        .catch((e) => console.log(e));
     } catch (error) {
       console.log("error from update profile", error);
     }
@@ -110,7 +110,9 @@ function UpdateProfile() {
               }}
               src={
                 updateProfileData?.profile
-                  ? URL.createObjectURL(updateProfileData?.profile)
+                  ? typeof updateProfileData?.profile === "object"
+                    ? URL.createObjectURL(updateProfileData?.profile)
+                    : updateProfileData?.profile
                   : image
               }
               alt=""
