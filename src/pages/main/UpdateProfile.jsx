@@ -37,8 +37,8 @@ function UpdateProfile() {
   const submitUpdateProfile = async () => {
     try {
       let fd = new FormData();
-      fd.append("first_name", "aakash burman");
-      fd.append("last_name", updateProfileData?.last_name);
+      fd.append("first_name", "burman");
+      fd.append("last_name", "divya");
       fd.append("age", updateProfileData?.age);
       fd.append("profile", updateProfileData?.profile);
       console.log(fd);
