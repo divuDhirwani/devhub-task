@@ -33,7 +33,7 @@ function UpdateProfile() {
       }));
     }
   };
-  console.log(UpdateProfileData);
+  console.log(UpdateProfileData, "divya");
   const submitUpdateProfile = async () => {
     try {
       let fd = new FormData();
@@ -50,7 +50,7 @@ function UpdateProfile() {
         body: fd,
       });
       let temp = await res.json();
-      console.log(temp);
+      console.log(temp, "divya");
       if (temp?.status) {
         dispatch(updateUserDetails(temp?.data));
         alert("Updated successful");
