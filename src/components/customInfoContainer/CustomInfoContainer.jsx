@@ -1,6 +1,6 @@
 import React from "react";
 
-function CustomInfoContainer({ name }) {
+function CustomInfoContainer({ name, value }) {
   return (
     <div>
       <div
@@ -15,6 +15,7 @@ function CustomInfoContainer({ name }) {
         }}
       >
         {name}
+        <div>{value}</div>
       </div>
     </div>
   );

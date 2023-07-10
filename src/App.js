@@ -11,7 +11,7 @@ import UpdateProfile from "./pages/main/UpdateProfile";
 function App() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { AUTH, LOGIN, PROFILE, REGISTER, UPDATEPROFILE } = routeNames;
+  const { AUTH, LOGIN, PROFILE, REGISTER, UPDATE_PROFILE } = routeNames;
   const token = useSelector((state) => state?.authReducer?.accessToken);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function App() {
       ) : (
         <>
           <Route path={PROFILE} element={<Profile />} />
-          <Route path={UPDATEPROFILE} element={<UpdateProfile />} />
+          <Route path={UPDATE_PROFILE} element={<UpdateProfile />} />
         </>
       )}
       <Route />

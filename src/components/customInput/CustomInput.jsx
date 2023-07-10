@@ -1,3 +1,4 @@
+import { isDisabled } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 function CustomInput({
@@ -7,6 +8,8 @@ function CustomInput({
   onChange,
   errorMessage,
   type = "text",
+  defaultValue = "",
+  isDisabled = false,
 }) {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,6 +27,8 @@ function CustomInput({
       }}
     >
       <input
+        disabled={isDisabled}
+        defaultValue={defaultValue}
         type={type === "text" ? "text" : showPassword ? "text" : "password"}
         onChange={onChange}
         name={name}

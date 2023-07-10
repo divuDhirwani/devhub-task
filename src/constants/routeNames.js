@@ -3,5 +3,5 @@ export default {
   LOGIN: "login",
   REGISTER: "register",
   PROFILE: "/profile",
-  UPDATEPROFILE: "/updateProfile",
+  UPDATE_PROFILE: "/update-profile",
 };

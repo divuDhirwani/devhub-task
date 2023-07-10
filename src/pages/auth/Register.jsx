@@ -4,6 +4,7 @@ import CustomButton from "src/components/customButton/CustomButton";
 import CustomInput from "src/components/customInput/CustomInput";
 import routeNames from "src/constants/routeNames";
 import UserImage from "src/assets/images/userImage.png";
+import { registerApi } from "src/apiServices/authService";
 // import Login from "./Login";
 
 function Register() {
@@ -18,8 +19,27 @@ function Register() {
     email: "",
     password: "",
   });
-  console.log(userDetails);
+  // console.log(userDetails);
+  const handleRegister = async () => {
+    try {
+      let res = await registerApi({
+        image: userDetails.image,
+        first_name: userDetails?.firstName,
+        last_name: userDetails?.lastName,
+        age: userDetails?.age,
+        mobile: userDetails?.mobileNumber,
+        email: userDetails?.email,
+        password: userDetails?.password,
+      });
 
+      if (res?.data?.status) {
+        navigate(`${AUTH}/${LOGIN}`);
+        alert("Registered successful");
+      } else {
+        alert(res?.data?.message);
+      }
+    } catch (error) {}
+  };
   function handleChange(e) {
     if (e.target.type === "file") {
       if (e.target.files)
@@ -135,7 +155,7 @@ function Register() {
           onChange={handleChange}
         />
       </div>
-      <CustomButton name={"Register"} />
+      <CustomButton onClick={handleRegister} name={"Register"} />
 
       <div style={{ margin: "10px" }}>
         Already have an account?
