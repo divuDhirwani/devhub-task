@@ -1,0 +1,17 @@
+.auth_left_section {
+  display: flex;
+  width: 50%;
+}
+.auth_right_section {
+  display: flex;
+  width: 50%;
+}
+
+@media (max-width: 740px) {
+  .auth_left_section {
+    display: none;
+  }
+  .auth_right_section {
+    width: 100%;
+  }
+}
