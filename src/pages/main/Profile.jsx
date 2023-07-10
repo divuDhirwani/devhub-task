@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,20 +10,16 @@ import routeNames from "src/constants/routeNames";
 
 function Profile() {
   const token = useSelector((state) => state?.authReducer?.accessToken);
-  const profileDetails = useSelector(
-    (state) => state?.authReducer?.userDetails
-  );
-  const [profileData, setProfileData] = useState(profileDetails);
+
+  const [profileData, setProfileData] = useState();
   const { UPDATE_PROFILE } = routeNames;
   const navigate = useNavigate();
-  console.log(profileData, "divya");
   const getProfileData = async () => {
     try {
-      let res = await fetch(`${BASEURL}/profile`, {
+      let res = await axios.get(`${BASEURL}/profile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      let temp = await res.json();
-      setProfileData(temp?.data);
+      setProfileData(res?.data?.data);
     } catch (error) {
       console.log("error from profile", error);
     }
@@ -71,7 +68,7 @@ function Profile() {
             }}
             src={profileData?.profile ? profileData?.profile : image}
             alt=""
-          />{" "}
+          />
           <div style={{ flexWrap: "wrap" }}>
             <div
               style={{
@@ -81,14 +78,12 @@ function Profile() {
               }}
             >
               <CustomInfoContainer
-                value={profileData.first_name}
-                key={profileData?.first_name}
-                // setProfileData={profileDetails?.first_name}
+                value={profileData?.first_name}
                 name="First Name"
               />
 
               <CustomInfoContainer
-                value={profileData.last_name}
+                value={profileData?.last_name}
                 name="Last Name"
               />
             </div>
@@ -107,8 +102,8 @@ function Profile() {
               }}
             >
               <CustomInfoContainer
-                key={profileData.age}
-                value={profileData.age}
+                key={profileData?.age}
+                value={profileData?.age}
                 name="Age"
               />
             </div>

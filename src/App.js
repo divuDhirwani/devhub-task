@@ -22,7 +22,10 @@ function App() {
       )
     ) {
       navigate(PROFILE);
-    } else if (!token && ["/", PROFILE]?.includes(location?.pathname)) {
+    } else if (
+      !token &&
+      ["/", PROFILE, UPDATE_PROFILE]?.includes(location?.pathname)
+    ) {
       navigate(`${AUTH}/${LOGIN}`);
     }
   }, [token]);
