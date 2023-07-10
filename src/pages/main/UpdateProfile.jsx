@@ -20,24 +20,44 @@ function UpdateProfile() {
     profile: profileData?.profile,
   });
   const handleChange = (e) => {
-    setUpdateProfileData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    if (e.target.type === "file") {
+      if (e.target.files)
+        setUpdateProfileData((prev) => ({
+          ...prev,
+          profile: e.target.files[0],
+        }));
+    } else if (e.target.type === "text") {
+      setUpdateProfileData((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
+  console.log(UpdateProfileData);
   const submitUpdateProfile = async () => {
     try {
+      let fd = new FormData();
+      fd.append("first_name", updateUserDetails?.first_name);
+      fd.append("last_name", updateUserDetails?.last_name);
+      fd.append("age", updateUserDetails?.age);
+      fd.append("profile", updateUserDetails?.profile);
       let res = await fetch(`${BASEURL}/update_profile`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify(UpdateProfileData),
+        body: fd,
       });
       let temp = await res.json();
-      dispatch(updateUserDetails(temp?.data));
-      navigate(PROFILE);
+      console.log(temp);
+      if (temp?.status) {
+        dispatch(updateUserDetails(temp?.data));
+        alert("Updated successful");
+        navigate(PROFILE);
+      } else {
+        alert(temp?.message);
+      }
     } catch (error) {
       console.log("error from update profile", error);
     }
@@ -68,19 +88,45 @@ function UpdateProfile() {
             flexDirection: "column",
           }}
         >
-          <img
+          <div
             style={{
+              display: "flex",
+              position: "relative",
               height: "100px",
               width: "100px",
               borderRadius: "50%",
               border: "1px solid black",
-              marginBottom: "30px",
-              // marginLeft: "30px",
-              marginTop: "30px",
+              margin: "30px 0",
+              overflow: "hidden",
             }}
-            src={profileData?.profile ? profileData?.profile : image}
-            alt=""
-          />
+          >
+            <img
+              style={{
+                height: "100%",
+                width: "100%",
+                // marginLeft: "30px",
+                objectFit: "cover",
+              }}
+              src={
+                UpdateProfileData?.profile
+                  ? URL.createObjectURL(UpdateProfileData?.profile)
+                  : image
+              }
+              alt=""
+            />
+            <input
+              style={{
+                height: "100%",
+                width: "100%",
+                // borderRadius: "20px",
+                position: "absolute",
+                opacity: 0,
+                zIndex: 2,
+              }}
+              type="file"
+              onChange={handleChange}
+            />
+          </div>
           <div style={{ flexWrap: "wrap" }}>
             <div
               style={{
