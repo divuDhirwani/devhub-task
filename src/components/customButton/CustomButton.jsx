@@ -10,7 +10,7 @@ function CustomButton({ name, onClick }) {
         border: "1px solid transparent",
         backgroundColor: "#2412E4",
         cursor: "pointer",
-        maxWidth: "320px",
+        maxWidth: "290px",
         width: "100%",
         minHeight: "50px",
         color: "#DCDFFF",
